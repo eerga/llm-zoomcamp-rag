@@ -69,8 +69,9 @@ def llm_structured_retry(
 
 class RAGWithUsage(RAGBase):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, boost_dict=None, **kwargs):
         super().__init__(*args, **kwargs)
+        self.boost_dict = boost_dict or {"question": 1.0, "answer": 2.0, "section": 0.1}
         self.usages = []
         self.last_usage = None
 
@@ -79,13 +80,12 @@ class RAGWithUsage(RAGBase):
         self.last_usage = None
 
     def search(self, query, num_results=5):
-        boost_dict = {"question": 1.0, "answer": 2.0, "section": 0.1}
         filter_dict = {"course": self.course}
 
         return self.index.search(
             query,
             num_results=num_results,
-            boost_dict=boost_dict,
+            boost_dict=self.boost_dict,
             filter_dict=filter_dict
         )
 
