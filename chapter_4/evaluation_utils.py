@@ -89,21 +89,25 @@ class RAGWithUsage(RAGBase):
             filter_dict=filter_dict
         )
 
-    def llm(self, prompt):
+    def llm(self, prompt, max_retries=5):
         input_messages = [
             {"role": "developer", "content": self.instructions},
             {"role": "user", "content": prompt}
         ]
 
-        response = self.llm_client.responses.create(
-            model=self.model,
-            input=input_messages
-        )
-
-        self.last_usage = response.usage
-        self.usages.append(response.usage)
-
-        return response.output_text
+        for attempt in range(max_retries):
+            try:
+                response = self.llm_client.responses.create(
+                    model=self.model,
+                    input=input_messages
+                )
+                self.last_usage = response.usage
+                self.usages.append(response.usage)
+                return response.output_text
+            except Exception:
+                if attempt == max_retries - 1:
+                    raise
+                time.sleep(2 ** attempt)
 
     def total_cost(self):
         return calc_total_price(self.usages)
