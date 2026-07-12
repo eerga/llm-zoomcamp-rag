@@ -8,6 +8,7 @@ dependencies = [
     "gitsource>=0.0.5",
     "jupyter>=1.1.1",
     "minsearch>=0.1.0",
+    "onnxruntime>=1.27.0",
     "openai>=2.41.0",
     "pandas>=3.0.3",
     "psycopg[binary]>=3.3.4",
