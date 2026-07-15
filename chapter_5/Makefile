@@ -8,7 +8,7 @@ chat:
 	uv run streamlit run app.py
 
 network:
-	docker network create monitoring
+	docker network create monitoring 2>/dev/null || true
 
 postgres: network
 	docker run -it \
@@ -20,3 +20,6 @@ postgres: network
 		-p 5432:5432 \
 		-v pgdata:/var/lib/postgresql/data \
 		postgres:17
+
+start-agent:
+	docker start course-assistant-pg
