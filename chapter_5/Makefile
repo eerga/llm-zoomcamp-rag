@@ -2,7 +2,7 @@ start-env:
 	source /workspaces/llm-zoomcamp-rag/.venv/bin/activate
 	
 run:
-	uv run python assistant.py
+	uv run python assistant.py "$(Q)"
 
 chat:
 	uv run streamlit run app.py
@@ -36,3 +36,6 @@ query:
 
 dashboard:
 	uv run streamlit run dashboard.py --server.port 8502
+
+judge:
+	uv run python judge.py
