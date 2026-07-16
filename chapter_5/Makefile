@@ -23,3 +23,10 @@ postgres: network
 
 start-agent:
 	docker start course-assistant-pg
+
+start-db:
+	uv run python db_init.py
+
+check-data:
+	docker exec -it course-assistant-pg psql -U user -d course_assistant \
+    -c "SELECT id, question, response_time, cost FROM conversations;"
