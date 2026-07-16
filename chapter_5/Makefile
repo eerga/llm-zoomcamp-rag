@@ -30,3 +30,9 @@ start-db:
 check-data:
 	docker exec -it course-assistant-pg psql -U user -d course_assistant \
     -c "SELECT id, question, response_time, cost FROM conversations;"
+
+query:
+	uv run python db_query.py
+
+dashboard:
+	uv run streamlit run dashboard.py --server.port 8502

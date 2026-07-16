@@ -44,6 +44,31 @@ def init_db(drop=False):
     finally:
         conn.close()
 
+# source column refers to the entity that gives feedback - either a user or another LLM
+# score: +1 is for thumbs up and -1 is for thumbs down
+# relevance and explanation are for the LLM judge
+def init_feedback():
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cur:
+            cur.execute("DROP TABLE IF EXISTS feedback")
+
+            cur.execute("""
+                CREATE TABLE feedback (
+                    id SERIAL PRIMARY KEY,
+                    conversation_id INTEGER REFERENCES conversations(id),
+                    source TEXT NOT NULL,
+                    relevance TEXT,
+                    explanation TEXT,
+                    score INTEGER,
+                    timestamp TIMESTAMP WITH TIME ZONE NOT NULL
+                )
+            """)
+        conn.commit()
+    finally:
+        conn.close()
+
 if __name__ == "__main__":
     init_db()
+    init_feedback()
     print("Database initialized")
