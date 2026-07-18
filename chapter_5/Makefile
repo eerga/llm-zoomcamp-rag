@@ -40,7 +40,7 @@ dashboard:
 judge:
 	uv run python judge.py
 
-gen-data:
+gen-data: start-agent
 	uv run python generate_data.py
 
 grafana-start:
