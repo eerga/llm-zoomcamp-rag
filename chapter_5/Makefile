@@ -23,6 +23,7 @@ postgres: network
 
 start-agent:
 	docker start course-assistant-pg
+	sleep 3
 
 start-db:
 	uv run python db_init.py
