@@ -25,6 +25,9 @@ start-agent:
 	docker start course-assistant-pg
 	sleep 3
 
+stop-agent:
+	docker stop course-assistant-pg
+
 start-db:
 	uv run python db_init.py
 
@@ -46,6 +49,9 @@ gen-data: start-agent
 
 grafana-start:
 	docker start grafana
+
+grafana-stop:
+	docker stop grafana
 	
 grafana:
 	docker run -d \
