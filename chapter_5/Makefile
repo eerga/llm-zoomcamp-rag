@@ -28,6 +28,13 @@ start-agent:
 stop-agent:
 	docker stop course-assistant-pg
 
+stop-deps:
+	docker stop course-assistant-pg 2>/dev/null || true
+	docker stop grafana 2>/dev/null || true
+
+docker-up: stop-deps
+	docker-compose up
+
 start-db:
 	uv run python db_init.py
 
