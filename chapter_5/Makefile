@@ -33,7 +33,10 @@ stop-deps:
 	docker stop grafana 2>/dev/null || true
 
 docker-up: stop-deps
-	docker-compose up
+	docker-compose up -d
+
+docker-down:
+	docker-compose down
 
 start-db:
 	uv run python db_init.py
