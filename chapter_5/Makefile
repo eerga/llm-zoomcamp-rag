@@ -21,11 +21,19 @@ postgres: network
 		-v pgdata:/var/lib/postgresql/data \
 		postgres:17
 
+
 start-agent:
+	docker start chapter_5-postgres-1
+	until docker exec chapter_5-postgres-1 pg_isready -U user; do sleep 1; done
+
+stop-agent:
+	docker stop chapter_5-postgres-1
+
+start-agent-old:
 	docker start course-assistant-pg
 	sleep 3
 
-stop-agent:
+stop-agent-old:
 	docker stop course-assistant-pg
 
 stop-deps:
