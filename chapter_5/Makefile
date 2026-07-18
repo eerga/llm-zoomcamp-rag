@@ -43,6 +43,9 @@ judge:
 gen-data:
 	uv run python generate_data.py
 
+grafana-start:
+	docker start grafana
+	
 grafana:
 	docker run -d \
     --name grafana \
