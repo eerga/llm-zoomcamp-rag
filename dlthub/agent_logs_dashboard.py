@@ -15,7 +15,7 @@ def _():
 
 @app.cell
 def _(dlt):
-    pipeline = dlt.attach("agent_logs")
+    pipeline = dlt.attach("agent_logs", destination="playground", dataset_name="agent_logs_data")
     dataset = pipeline.dataset()
     return (dataset,)
 

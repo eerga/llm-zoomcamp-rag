@@ -63,10 +63,10 @@ To access a list of workspaces:
 
 `uv run dlthub workspace list`
 
-To deploy, run this:
+To deploy, ask this from Claude run this:
 
 `deploy rest_api_pipeline.py` 
-
+- You will be prompted to connect your work to a workspace for future deployment
 - For storage options, keep DuckDB for now
 
 You cannot deploy the dashboards with the local files - they should exist somewhere in the cloud storage
@@ -78,5 +78,14 @@ It's a lot of work - that's why
 
 Stopped watch at 1:23
 
+Change destination in the pipeline script to `playground`
+
+let's not forget to install deltalake dependency to `pyproject.ml`
+
+
+run this code to deploy:
+`uv run dlthub deploy`
+
+and then run
 
 

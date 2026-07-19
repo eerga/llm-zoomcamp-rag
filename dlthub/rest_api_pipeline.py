@@ -2,6 +2,7 @@ from typing import Any, Optional
 
 import dlt
 from dlt.common.pendulum import pendulum
+from dlt.hub import run
 from dlt.sources.rest_api import (
     RESTAPIConfig,
     check_connection,
@@ -94,10 +95,11 @@ def github_source(access_token: Optional[str] = dlt.secrets.value) -> Any:
     yield from rest_api_resources(config)
 
 
+@run.pipeline("rest_api_github")
 def load_github() -> None:
     pipeline = dlt.pipeline(
         pipeline_name="rest_api_github",
-        destination='duckdb',
+        destination='playground',
         dataset_name="rest_api_data",
     )
 
@@ -105,10 +107,11 @@ def load_github() -> None:
     print(load_info)  # noqa: T201
 
 
+@run.pipeline("rest_api_pokemon")
 def load_pokemon(base_url: str = "https://pokeapi.co/api/v2/") -> None:
     pipeline = dlt.pipeline(
         pipeline_name="rest_api_pokemon",
-        destination='duckdb',
+        destination='playground',
         dataset_name="rest_api_data",
     )
 
