@@ -36,9 +36,14 @@ start-agent-old:
 stop-agent-old:
 	docker stop course-assistant-pg
 
-stop-deps:
+stop-deps-old:
 	docker stop course-assistant-pg 2>/dev/null || true
 	docker stop grafana 2>/dev/null || true
+
+stop-deps:
+	docker stop chapter_5-postgres-1 2>/dev/null || true
+	docker stop chapter_5-grafana-1 2>/dev/null || true
+	docker stop chapter_5-streamlit-1 2>/dev/null || true
 
 docker-up: stop-deps
 	docker-compose up -d
