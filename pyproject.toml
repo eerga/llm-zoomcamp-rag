@@ -25,4 +25,5 @@ dependencies = [
 [tool.uv.workspace]
 members = [
     "llm-zoomcamp-hw5",
+    "dlt_hw",
 ]
