@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "dlt[duckdb]>=1.29.0",
+    "importlib-metadata>=9.0.0",
     "logfire[system-metrics]>=3.5.1",
     "minsearch>=0.1.0",
     "openai>=2.41.0",

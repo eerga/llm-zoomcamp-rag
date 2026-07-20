@@ -6,3 +6,5 @@ faq.db*
 *.db-wal
 __pycache__/
 .python-version
+*.duckdb
+.DS_Store
